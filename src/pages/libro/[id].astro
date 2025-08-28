@@ -4,6 +4,7 @@ import { getCollection, render } from "astro:content";
 import { SHOW_BUY_BUTTON } from "astro:env/server";
 import Layout from "../../layouts/Layout.astro";
 import BookScore from "../../components/BookScore.astro";
+import BuyButton from "../../components/BuyButton.astro";
 
 export async function getStaticPaths() {
   const books = await getCollection("books");
@@ -39,13 +40,7 @@ export const prerender = true
     así usamos islas de servidor -->
       <BookScore server:defer id={slug}/>
        {
-        SHOW_BUY_BUTTON && (
-        <a
-          class="text-black h-10 w-28 bg-gray-100 border border-white"
-          href={buy.spain}>
-            Compra aquí
-        </a>
-        )
+        SHOW_BUY_BUTTON && <BuyButton server:defer buy={buy} />
        }
     </aside>
 
