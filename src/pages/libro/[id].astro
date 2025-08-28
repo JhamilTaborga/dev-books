@@ -19,6 +19,9 @@ const { data, slug } = book
 const { title, author, img, readtime, description, buy } = data
 
 const { Content } = await render(book)
+
+//De esta forma le decimos al servidor que queremos que esta página siga siendo estática:
+export const prerender = true
 ---
 
 <Layout title={`${title} - Books`}>
@@ -30,7 +33,11 @@ const { Content } = await render(book)
         class="rounded w-60 h-auto" 
         src={`/${img}`} 
         alt={title}>
-      <BookScore id={slug}/>
+<!--Si queremos que esta parte "BookScore" sea dinámica tenemos que agregar server:defer
+    y tenemos que cambiar la configuración en Astro.config.mjs-->
+<!--Lo único que queremos que no sea estático es este componente, esta parte de nuestra página,
+    así usamos islas de servidor -->
+      <BookScore server:defer id={slug}/>
        {
         SHOW_BUY_BUTTON && (
         <a

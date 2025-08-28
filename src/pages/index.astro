@@ -4,6 +4,8 @@ import { getCollection } from 'astro:content';
 
 const books = await getCollection('books');
 
+//De esta forma le decimos al servidor que queremos que esta página siga siendo estática:
+export const prerender = true
 ---
 
 <Layout title="Filosophy books">
